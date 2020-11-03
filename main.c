@@ -6,7 +6,7 @@
 /*   By: jiykim <jiykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 19:29:08 by jiykim            #+#    #+#             */
-/*   Updated: 2020/11/03 16:44:52 by jiykim           ###   ########.fr       */
+/*   Updated: 2020/11/03 18:10:48 by jiykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,10 @@ void	ft_free_map(int **ptr)
 {
 	int ptr_i;
 
-	ptr_i = 0; 
-	printf("free start\n");
-	while(ptr_i < g_row + 2)
-	{
-		printf("a\n");
+	ptr_i = 0;
+	while(ptr_i < g_row + 1)
 		free(ptr[ptr_i++]);
-		printf("b\n");
-	}
-	printf("1free\n");
-	free(ptr); 
-	printf("2free\n");
+	free(ptr);
 }
 
 int	ft_open_file(char *file, char *buf)
@@ -66,12 +59,12 @@ int	ft_open_file2(char *file2, char *buf2)
 
 	i = 0;
 	map = (int **)malloc(sizeof(int *) * g_row + 2);
-	printf("mallocas\n");
-	while (i < g_row + 2)
+	while (i < g_row + 1)
 	{
 		map[i] = ft_calloc(map[i], g_col + 1);
 		i++;
 	}
+	map[i] = (int *)malloc(sizeof(int));
 	if (0 < (fd2 = open(file2, O_RDONLY)))
 	{
 		open_f2 = ft_read_file2(map, fd2, buf2);
