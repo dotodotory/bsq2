@@ -6,7 +6,7 @@
 /*   By: jiykim <jiykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 19:29:08 by jiykim            #+#    #+#             */
-/*   Updated: 2020/11/03 18:10:48 by jiykim           ###   ########.fr       */
+/*   Updated: 2020/11/03 19:34:10 by jiykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,11 @@ int	ft_open_file2(char *file2, char *buf2)
 	int **map;
 	int fd2;
 
-	i = 0;
+	i = -1;
 	map = (int **)malloc(sizeof(int *) * g_row + 2);
-	while (i < g_row + 1)
-	{
+	while (++i < g_row + 1)
 		map[i] = ft_calloc(map[i], g_col + 1);
-		i++;
-	}
-	map[i] = (int *)malloc(sizeof(int));
+	map[i] = 0;
 	if (0 < (fd2 = open(file2, O_RDONLY)))
 	{
 		open_f2 = ft_read_file2(map, fd2, buf2);
@@ -77,7 +74,7 @@ int	ft_open_file2(char *file2, char *buf2)
 	else
 		return (0);
 	chk(map);
-	print_map(map, c);
+	print_map(map, g_c);
 	ft_free_map(map);
 	return (1);
 }
