@@ -18,7 +18,7 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 #include <stdio.h>
-#define BUFF_SIZE 2048
+#define BUFF_SIZE 20
 
 typedef struct	s_read{
 	int buf_i;

@@ -79,21 +79,52 @@ int	ft_open_file2(char *file2, char *buf2)
 	return (1);
 }
 
+int ft_stdin_read(int fd, char *buf)
+{
+	int **map;
+	int i;
+	int err_chk;
+
+	i = -1;
+	map = (int **)malloc(sizeof(int *) * g_row +2);
+	while(++i <g_row + 1)
+		map[i] = ft_calloc(map[1], g_col + 1);
+	map[i] = 0;
+	err_chk = ft_read_file2(map, fd, buf);
+	if (err_chk == -1)
+	{
+		ft_free_map(map);
+		return (-1);
+	}
+	else
+		return (0);
+	chk(map);
+	print_map(map, g_c);
+	ft_free_map(map);
+	return (1);
+}
+
 int		main(int argc, char **argv)
 {
 	int main_f;
 	char buff[BUFF_SIZE];
+	int idx;
 
-	if (argc == 2)
+
+	if (argc ==1)
 	{
-		main_f = ft_open_file(argv[1], buff);
+		ft_read_file(0, buff);
+		ft_stdin_read(0, buff);
+	}
+	idx = 1;
+	while (idx < argc)
+	{
+		main_f = ft_open_file(argv[idx], buff);
 		if (!is_error(main_f))
 			return (0);
-		main_f = ft_open_file2(argv[1], buff);
+		main_f = ft_open_file2(argv[idx], buff);
 		if (!is_error(main_f))
 			return (0);
 	}
-	else
-		is_error(0);
 	return (0);
 }
